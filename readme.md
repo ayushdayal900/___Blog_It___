@@ -4,8 +4,4 @@
 * Bootstrap
 * CSS
 * HTML
-* aaaaaaaaaa
-* coming from dev-ram ha ha ha
-* 1
-* trying git revert
-* 
+
