@@ -3,12 +3,25 @@
 <head>
 
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-     <!-- Bootstrap CSS -->
+    <meta charset="utf-8">
+<!--    It defines the character encoding for the document.-->
+<!--    It supports all characters from the Unicode standard, including characters from different languages       (e.g., Chinese, Arabic), symbols, emojis, etc.-->
+<!--    UTF-8 uses variable-length encoding, where characters are encoded using 1 to 4 bytes.-->
+<!--    "8" in UTF-8 ( Unicode Transformation Format ) refers to the number of bits used to represent a character.-->
+<!--    This allows UTF-8 to handle both English text (represented in 1 byte) and more complex characters (requiring multiple bytes) efficiently.-->
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--   <meta> tag: This tag provides meta-information about the HTML document, which is not displayed on the page itself but is used by browsers and search engines.-->
+<!--    name="viewport":  Viewport is the user's visible area of the browser window. -->
+<!--    This tells the browser to set the width of the viewport to the width of the device's screen. -->
+<!--    initial-scale=1: This sets the initial zoom level of the page to 1, meaning that the page will not be zoomed in or out initially.-->
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--    adding external css-->
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
