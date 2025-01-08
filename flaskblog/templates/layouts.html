@@ -1,59 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
     <!-- Required meta tags -->
-
     <meta charset="utf-8">
-<!--    It defines the character encoding for the document.-->
-<!--    It supports all characters from the Unicode standard, including characters from different languages       (e.g., Chinese, Arabic), symbols, emojis, etc.-->
-<!--    UTF-8 uses variable-length encoding, where characters are encoded using 1 to 4 bytes.-->
-<!--    "8" in UTF-8 ( Unicode Transformation Format ) refers to the number of bits used to represent a character.-->
-<!--    This allows UTF-8 to handle both English text (represented in 1 byte) and more complex characters (requiring multiple bytes) efficiently.-->
-
-
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--   <meta> tag: This tag provides meta-information about the HTML document, which is not displayed on the page itself but is used by browsers and search engines.-->
-<!--    name="viewport":  Viewport is the user's visible area of the browser window. -->
-<!--    This tells the browser to set the width of the viewport to the width of the device's screen. -->
-<!--    initial-scale=1: This sets the initial zoom level of the page to 1, meaning that the page will not be zoomed in or out initially.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!--    adding external css-->
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
     {% if title %}
-        <title>Flask Blog - {{title}}</title>
+        <title>Flask Blog - {{ title }}</title>
     {% else %}
         <title>Flask Blog</title>
     {% endif %}
-
 </head>
 <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="{{ url_for('home') }}">Flask Blog</a>
+          <a class="navbar-brand mr-4" href="/">Flask Blog</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-              <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+              <a class="nav-item nav-link" href="{{ url_for('main.home') }}">Home</a>
+              <a class="nav-item nav-link" href="{{ url_for('main.about') }}">About</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-                {% if current_user.is_authenticated %}
-                    <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-                    <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
-                {% else %}
-                  <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-                  <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-                {% endif %}
+              {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link" href="{{ url_for('posts.new_post') }}">New Post</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Login</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.register') }}">Register</a>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -62,16 +47,15 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
-            {% with messages = get_flashed_messages(with_categories=true)%}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith%}
-
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
           {% block content %}{% endblock %}
         </div>
         <div class="col-md-4">
@@ -90,12 +74,11 @@
       </div>
     </main>
 
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
 </body>
 </html>
